@@ -11,12 +11,7 @@ export default {
 </script>
 
 <style lang="scss">
-
-$blue: rgba(92, 158, 173, 1);
-$purple: rgba(75, 63, 114, 1);
-$yellow: rgba(255, 200, 87, 1);
-$white: rgba(254, 250, 224, 1);
-$lime: rgba(252, 246, 177, 1);
+@import './static/styles.scss';
 
 html,body{
   width: 100%;
@@ -24,7 +19,7 @@ html,body{
 }
 
 body{
-  background: $lime;
+  background: url('./assets/img/vertical-waves.png');
   margin: 0;
   padding: 0;
   display: flex;
