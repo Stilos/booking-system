@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import LoginFormComponent from '@/components/Login/LoginFormComponent';
+import LoginFormView from '@/components/Login/LoginFormView';
 
 // import Hello from '@/components/Hello';
 
@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'LoginFormComponent',
-      component: LoginFormComponent,
+      name: 'LoginFormView',
+      component: LoginFormView,
     },
   ],
 });

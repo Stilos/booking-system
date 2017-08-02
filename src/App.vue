@@ -13,13 +13,18 @@ export default {
 <style lang="scss">
 @import './static/styles.scss';
 
+body *{
+  display: flex;
+}
+
 html,body{
   width: 100%;
   height:100%;
 }
 
 body{
-  background: url('./assets/img/vertical-waves.png');
+  font-family: 'Arial';
+  background: url('./assets/img/footer_lodyas.png');
   margin: 0;
   padding: 0;
   display: flex;
@@ -28,5 +33,6 @@ body{
 
 #app{
   display: flex;
+  width: 100%;
 }
 </style>

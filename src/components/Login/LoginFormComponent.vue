@@ -28,7 +28,7 @@ export default {
     align-items: center;
     background: $white;
     padding: 50px;
-    box-shadow: 0px 0px 15px 5px #848484;
+    box-shadow: 0px 0px 15px 5px $light-gray;
 
     form{
       width: 200px;
@@ -40,7 +40,8 @@ export default {
 
       input{
         border: none;
-        border-bottom: 1px solid #a5a5a5;
+        border-bottom: 1px solid $light-gray;
+        font-size: 20px;
 
         &:focus{    
           outline: none;
@@ -53,12 +54,35 @@ export default {
       }
 
       button{
+        margin-top: 10px;
         background: $orange;
+        font-size: 20px;
         color: $white;
         border: none;
         width: 80px;
         height: 40px;
         align-self: flex-end;
+        transition: all .5s;
+
+        &:hover{
+
+          color: $dark-blue;
+          cursor: pointer;
+          box-shadow: 0px 0px 10px 1px $light-gray;
+        }
+      }
+
+      p{
+        justify-content: space-between;
+        a{
+          text-decoration: none;
+          color: $light-gray;
+          font-size: 12px;
+          
+          &:hover{
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
