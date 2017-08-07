@@ -1,25 +1,22 @@
 <template>
   <div id="header-component">
-    <h1>Booking</h1>
-    <i class="fa fa-bars" aria-hidden="true"></i>
-    <nav class="navigation-menu">
-      <ul>
-        <li>Menu Item</li>
-        <li>Menu Item</li>
-        <li>Menu Item</li>
-        <li>Menu Item</li>
-      </ul>
-    </nav>
+    <h1>(~(~(~(~(~_~)~)~(~_~)~)</h1>
+    <navigation-menu></navigation-menu>
   </div>
 </template>
 
 <script>
+import NavigationMenu from './MenuComponent';
+
 export default {
   name: 'HeaderComponent',
+  components: {
+    NavigationMenu,
+  },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import './static/styles.scss';
 
   #header-component{
@@ -29,21 +26,10 @@ export default {
     background: $white;
     justify-content: space-between;
 
-
-    i{
-      font-size: 40px;
-      margin-top: 10px;
-      margin-right: 10px;
-    }
-
     h1{
       margin: 10px 0;
       padding: 0;
       font-size: 40px;
-    }
-
-    .navigation-menu{
-      display: none;
     }
   }
 

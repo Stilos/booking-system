@@ -1,13 +1,40 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <header-component></header-component>
+    <router-view class="app-content-view" v-bind:class="[menuVisible ? 'menuOpened' : menuWasOpened ? 'menuClosed': '']" :key="menuVisible" ></router-view>
+    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-};
+  
+  import EventBus from './bus/EventBus';
+  import HeaderComponent from './components/Header/HeaderComponent';
+  import FooterComponent from './components/Footer/FooterComponent';
+
+  export default {
+    name: 'app',
+    data() {
+      return {
+        menuVisible: false,
+        menuWasOpened: false,
+      };
+    },
+    components: {
+      EventBus,
+      HeaderComponent,
+      FooterComponent,
+    },
+    created() {
+      EventBus.$on('navigationMenu_toggle', this.toggleMenuFunction);
+    },
+    methods: {
+      toggleMenuFunction() {
+        this.menuVisible = !this.menuVisible;
+        this.menuWasOpened = true;
+      },
+    },
+  };
 </script>
 
 <style lang="scss">
@@ -31,8 +58,54 @@ body{
   justify-content: center;
 }
 
-#app{
-  display: flex;
-  width: 100%;
-}
+  #app{
+    display: flex;
+    width: 100%;
+  }
+
+  .app-content-view{
+    transition: 1s all ease;
+  }
+  
+  .app-content-view.menuOpened{
+    animation: slide-in 1s forwards;
+  }
+
+ .app-content-view.menuClosed{
+    animation: slide-out 1s;
+  }
+
+  @keyframes slide-in {
+      0% { margin-left: 0; }
+      100% { margin-left: 80%; }
+  }
+
+  @keyframes slide-out {
+      0% { margin-left: 80%; }
+      100% { margin-left: 0%; }
+  }
+
+  @media screen and (min-width: 600px){
+     @keyframes slide-in {
+      0% { margin-left: 0; }
+      100% { margin-left: 30%; }
+    }
+
+    @keyframes slide-out {
+      0% { margin-left: 30%; }
+      100% { margin-left: 0%; }
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+     @keyframes slide-in {
+      0% { margin-left: 0; }
+      100% { margin-left: 300px; }
+    }
+
+    @keyframes slide-out {
+      0% { margin-left: 300px; }
+      100% { margin-left: 0%; }
+    }
+  }
 </style>

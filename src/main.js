@@ -7,6 +7,7 @@ import router from './router';
 Vue.config.productionTip = false;
 
 require('font-awesome-webpack2');
+require('./assets/css/animate.css');
 
 /* eslint-disable no-new */
 new Vue({
