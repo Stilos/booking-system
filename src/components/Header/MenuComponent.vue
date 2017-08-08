@@ -1,12 +1,16 @@
 <template>
  
   <div id="navigation-menu">
-    <i class="fa fa-bars menu-trigger" aria-hidden="true" @click="toggleMenu"></i>
-    <transition 
+    <button type="menu"  @click="toggleMenu" v-bind:class="{ 'menu-visible': menuVisible }">
+      <i class="fa fa-bars menu-trigger" aria-hidden="true" v-if="!menuVisible"></i>
+      <i class="fa fa-times menu-trigger" aria-hidden="true" v-if="menuVisible"></i>
+      </button>
+    <transition-group 
     name="custom-classes-transition"
     enter-active-class="animated slideInLeft"
     leave-active-class="animated slideOutLeft">
-      <nav class="menu-container"  v-if="menuVisible">
+      <button class="shutter" v-if="menuVisible" :key="1" @click="toggleMenu"></button>
+      <nav class="menu-container"  v-if="menuVisible" :key="2">
         <ul>
           <li><i class="fa fa-home"></i>Home</li>
           <li><i class="fa fa-question"></i>About</li>
@@ -15,7 +19,7 @@
           <li><i class="fa fa-unlock-alt"></i>Login</li>
         </ul>
       </nav>
-    </transition>
+    </transition-group>
   </div>
 </template>
 
@@ -34,6 +38,11 @@ export default {
   },
   methods: {
     toggleMenu() {
+      const obj = event.target;
+      obj.disabled = true;
+      setTimeout(() => {
+        obj.disabled = false;
+      }, 900);
       this.menuVisible = !this.menuVisible;
       EventBus.$emit('navigationMenu_toggle');
     },
@@ -44,11 +53,33 @@ export default {
 <style scoped lang="scss">
   @import './static/styles.scss';
 
+  button{
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: color 1s ease;
+
+    &.menu-visible{
+      color: $orange;
+    }
+  }
+
+  .shutter{
+    width: 100%;
+    height: 100%;
+    background: rgba(126, 138, 162, .5);
+    position: fixed;
+    left: 0;
+    top: 60px;
+  }
   .menu-trigger{
     cursor: pointer;
     font-size: 40px;
     margin: 10px 10px 0 0;
-    
+    pointer-events: none;
   }
   .menu-container{
       position: fixed;
