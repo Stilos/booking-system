@@ -2,9 +2,15 @@
  
   <div id="navigation-menu">
     <button type="menu"  @click="toggleMenu" v-bind:class="{ 'menu-visible': menuVisible }">
-      <i class="fa fa-bars menu-trigger" aria-hidden="true" v-if="!menuVisible"></i>
-      <i class="fa fa-times menu-trigger" aria-hidden="true" v-if="menuVisible"></i>
-      </button>
+      <transition 
+        name="custom-classes-transition"
+        :duration="500"
+        mode="out-in"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+        <i class="fa menu-trigger" v-bind:class="menuVisible ? 'fa-times' : 'fa-bars'" aria-hidden="true" :key="menuVisible"></i>
+    </transition>
+    </button>
     <transition-group 
     name="custom-classes-transition"
     enter-active-class="animated slideInLeft"
@@ -12,11 +18,21 @@
       <button class="shutter" v-if="menuVisible" :key="1" @click="toggleMenu"></button>
       <nav class="menu-container"  v-if="menuVisible" :key="2">
         <ul>
-          <li><i class="fa fa-home"></i>Home</li>
-          <li><i class="fa fa-question"></i>About</li>
-          <li><i class="fa fa-users"></i>Partners</li>
-          <li><i class="fa fa-envelope-o"></i>Contact</li>
-          <li><i class="fa fa-unlock-alt"></i>Login</li>
+          <li @click="navigateTo('/')">
+            <i class="fa fa-home"></i>Home
+          </li>
+          <li @click="navigateTo('about')">
+            <i class="fa fa-question"></i>About
+          </li>
+          <li @click="navigateTo('partners')">
+            <i class="fa fa-users"></i>Partners
+          </li>
+          <li @click="navigateTo('contact')">
+            <i class="fa fa-envelope-o"></i>Contact
+          </li>
+          <li @click="navigateTo('login')">
+            <i class="fa fa-unlock-alt"></i>Login
+          </li>
         </ul>
       </nav>
     </transition-group>
@@ -24,10 +40,10 @@
 </template>
 
 <script>
-import EventBus from '../../bus/EventBus';
+import EventBus from '@/bus/EventBus';
 
 export default {
-  name: 'navigationMenu',
+  name: 'MenuComponent',
   data() {
     return {
       menuVisible: false,
@@ -45,6 +61,10 @@ export default {
       }, 900);
       this.menuVisible = !this.menuVisible;
       EventBus.$emit('navigationMenu_toggle');
+    },
+    navigateTo(route) {
+      this.toggleMenu();
+      this.$router.push(route);
     },
   },
 };
@@ -74,6 +94,7 @@ export default {
     position: fixed;
     left: 0;
     top: 60px;
+    z-index: 998;
   }
   .menu-trigger{
     cursor: pointer;
@@ -88,6 +109,7 @@ export default {
       background: $light-gray;
       width: 50vw;
       height: 100%;
+      z-index: 999;
 
       ul{
         flex-direction: column;

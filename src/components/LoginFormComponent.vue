@@ -4,34 +4,34 @@
     name="custom-classes-transition"
     enter-active-class="animated flipInX"
     leave-active-class="animated flipOutX">
-      <form v-if="formState == 0">
+      <form v-if="formState == 'login'">
         <input type="text" name="login" placeholder="Login" v-model="formObject.login">
         <input type="password" name="password" placeholder="Hasło" v-model="formObject.password">
         <button type="submit">Zaloguj</button>
         <p>
-          <span @click="changeFormState(1)">Przypomnij Hasło</span>
-          <span @click="changeFormState(2)">Zarejestruj się!</span>
+          <span @click="changeFormState('remind')">Przypomnij Hasło</span>
+          <span @click="changeFormState('register')">Zarejestruj się!</span>
         </p>
       </form>
 
-      <form class="remind-password" v-if="formState == 1">
+      <form class="remind-password" v-if="formState == 'remind'">
         <input type="text" name="email" placeholder="Login \ e-mail" value="" v-model="formObject.remind">
         <p>
-          <span @click="changeFormState(0)">< Powrót</span>
+          <span @click="changeFormState('login')">< Powrót</span>
           <button type="submit">Przypomnij</button>
         </p>
       </form>
 
-      <form class="register" v-if="formState == 2">
-        <input type="text" name="name" placeholder="Imię" value="" v-model="formObject.name">
-        <input type="text" name="surname" placeholder="Nazwisko" value="" v-model="formObject.surname">
-        <input type="date" name="birthdate" placeholder="Data Urodzenia" value="" v-model="formObject.birthdate">
-        <input type="text" name="email" placeholder="E-Mail" value="" v-model="formObject.email">
-        <input type="password" name="password" placeholder="Hasło" value="" v-model="formObject.password">
-        <input type="password" name="password2" placeholder="Powtórz Hasło" value="" v-model="formObject.password2">
-        <input type="text" name="keycode" placeholder="Kod Rejestracyjny" value="" v-model="formObject.keycode">
+      <form class="register" v-if="formState == 'register'">
+        <div><input name="name" placeholder="Imię"type="text" value="" v-model="formObject.name" required><span></span></div>
+        <div><input  name="surname" placeholder="Nazwisko" type="text" value="" v-model="formObject.surname" required><span></span></div>
+        <div><input name="birthdate" placeholder="Data Urodzenia" type="date" value="" v-model="formObject.birthdate" required><span></span></div>
+        <div><input name="email" placeholder="E-Mail"type="email" value="" v-model="formObject.email" required><span></span></div>
+        <div><input name="password" placeholder="Hasło" type="password"  value="" v-model="formObject.password" required><span></span></div>
+        <div><input name="password2" placeholder="Powtórz Hasło" type="password" value="" v-model="formObject.password2" required><span></span></div>
+        <div><input name="keycode" placeholder="Kod Rejestracyjny" type="text"  value="" v-model="formObject.keycode" required><span></span></div>
         <p>
-          <span @click="changeFormState(0)">< Powrót</span>
+          <span @click="changeFormState('login')">< Powrót</span>
           <button type="submit">Zarejestruj</button>
         </p>
       </form>
@@ -44,7 +44,7 @@ export default {
   name: 'LoginFormComponent',
   data() {
     return {
-      formState: 0,
+      formState: 'login',
       formObject: {
         login: '',
         password: '',
@@ -71,6 +71,20 @@ export default {
 
 <style lang="scss">
 @import './static/styles.scss';
+
+input:invalid+span::after {
+  content: 'X';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
+
+input:valid+span::after {
+  content: 'V';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
 
   #login-form{
     display: flex;
@@ -102,6 +116,7 @@ export default {
         border: none;
         border-bottom: 1px solid $light-gray;
         font-size: 20px;
+        width: 100%;
 
         &:focus{    
           outline: none;

@@ -1,17 +1,17 @@
 <template>
   <div id="header-component">
     <h1>(~(~(~(~(~_~)~)~(~_~)~)</h1>
-    <navigation-menu></navigation-menu>
+    <menu-component></menu-component>
   </div>
 </template>
 
 <script>
-import NavigationMenu from './MenuComponent';
+import MenuComponent from '@/components/MenuComponent';
 
 export default {
   name: 'HeaderComponent',
   components: {
-    NavigationMenu,
+    MenuComponent,
   },
 };
 </script>

@@ -1,11 +1,11 @@
 <template>
-  <div id="login-form-view">
+  <div id="login-form-view" class="view-container">
     <login-form-component></login-form-component>
   </div>
 </template>
 
 <script>
-  import LoginFormComponent from './LoginFormComponent';
+  import LoginFormComponent from '@/components/LoginFormComponent';
 
   export default {
     name: 'LoginFormView',

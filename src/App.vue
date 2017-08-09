@@ -8,9 +8,9 @@
 
 <script>
   
-  import EventBus from './bus/EventBus';
-  import HeaderComponent from './components/Header/HeaderComponent';
-  import FooterComponent from './components/Footer/FooterComponent';
+  import EventBus from '@/bus/EventBus';
+  import HeaderComponent from '@/components/HeaderComponent';
+  import FooterComponent from '@/components/FooterComponent';
 
   export default {
     name: 'app',
@@ -61,8 +61,14 @@ body{
   #app{
     display: flex;
     width: 100%;
-  }
+    overflow: hidden;
 
+    .view-container{
+      width: 100%;
+      margin-top: 60px;
+      flex-direction: column;
+    }
+  }
   .app-content-view{
     transition: 1s all ease;
   }
@@ -76,36 +82,72 @@ body{
   }
 
   @keyframes slide-in {
-      0% { margin-left: 0; }
-      100% { margin-left: 80%; }
+      0% { 
+        margin-left: 0; 
+        margin-right: 0;
+      }
+      100% { 
+        margin-left: 50vw;
+        margin-right: -50vw;
+      }
   }
 
   @keyframes slide-out {
-      0% { margin-left: 80%; }
-      100% { margin-left: 0%; }
+      0% { 
+        margin-left: 50vw; 
+        margin-right: -50vw;
+      }
+      100% { 
+        margin-left: 0; 
+        margin-right: 0;  
+      }
   }
 
   @media screen and (min-width: 600px){
      @keyframes slide-in {
-      0% { margin-left: 0; }
-      100% { margin-left: 30%; }
+      0% { 
+        margin-left: 0; 
+        margin-right: 0;
+      }
+      100% { 
+        margin-left: 30vw;
+        margin-right: -30vw; 
+      }
     }
 
     @keyframes slide-out {
-      0% { margin-left: 30%; }
-      100% { margin-left: 0%; }
+      0% { 
+        margin-left: 30vw; 
+        margin-right: -30vw;
+      }
+      100% { 
+        margin-left: 0; 
+        margin-right: 0;  
+      }
     }
   }
 
   @media screen and (min-width: 1024px){
      @keyframes slide-in {
-      0% { margin-left: 0; }
-      100% { margin-left: 300px; }
+      0% { 
+        margin-left: 0; 
+        margin-right: 0;
+      }
+      100% { 
+        margin-left: 300px;
+        margin-right: -300px; 
+      }
     }
 
     @keyframes slide-out {
-      0% { margin-left: 300px; }
-      100% { margin-left: 0%; }
+     0% { 
+        margin-left: 300px; 
+        margin-right: -300px;
+      }
+      100% { 
+        margin-left: 0; 
+        margin-right: 0;  
+      }
     }
   }
 </style>
