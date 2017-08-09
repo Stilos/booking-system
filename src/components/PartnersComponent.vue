@@ -26,6 +26,11 @@ export default {
       ],
     };
   },
+  methods: {
+    getImageUrl(imageName) {
+      const baseUrl = 'asdasd';
+    }
+  }
 };
 </script>
 
